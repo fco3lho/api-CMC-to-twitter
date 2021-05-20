@@ -4,57 +4,58 @@ import tweepy
 import os
 import datetime
 import time
+import pprint
 
 url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest'
 
 parameters_btc = {
     'slug': 'bitcoin',
-    'convert': 'BRL'
+    'convert': 'USD'
 }
 
 parameters_eth = {
     'slug': 'ethereum',
-    'convert': 'BRL'
+    'convert': 'USD'
 }
 
 parameters_bnb = {
     'slug': 'binance-coin',
-    'convert': 'BRL'
+    'convert': 'USD'
 }
 
 parameters_ada = {
     'slug': 'cardano',
-    'convert': 'BRL'
+    'convert': 'USD'
 }
 
 parameters_xpr = {
     'slug': 'xrp',
-    'convert': 'BRL'
+    'convert': 'USD'
 }
 
 parameters_doge = {
     'slug': 'dogecoin',
-    'convert': 'BRL'
+    'convert': 'USD'
 }
 
 parameteres_dot = {
     'slug': 'polkadot-new',
-    'convert': 'BRL'
+    'convert': 'USD'
 }
 
 parameters_icp = {
     'slug': 'internet-computer',
-    'convert': 'BRL'
+    'convert': 'USD'
 }
 
 parameters_link = {
     'slug': 'chainlink',
-    'convert': 'BRL'
+    'convert': 'USD'
 }
 
 parameters_usd = {
     'slug': 'tether',
-    'convert': 'BRL'
+    'convert': 'USD'
 }
 
 headers = {
@@ -67,45 +68,57 @@ session.headers.update(headers)
 
 while True:
 
+#'percent_change_24h'
+
     response = session.get(url, params = parameters_btc)
-    price_btc = float(json.loads(response.text)['data']['1']['quote']['BRL']['price'])
-    print('Bitcoin: R${:.2f}'.format(price_btc))
+    price_btc = float(json.loads(response.text)['data']['1']['quote']['USD']['price'])
+    change_24h_btc = float(json.loads(response.text)['data']['1']['quote']['USD']['percent_change_24h'])
+    print('BTC: ${:.2f}'.format(price_btc),' |  Change 24h: {:.2f}'.format(change_24h_btc) + '%')
 
     response = session.get(url, params = parameters_eth)
-    price_eth = float(json.loads(response.text)['data']['1027']['quote']['BRL']['price'])
-    print('Ethereum: R${:.2f}'.format(price_eth))
+    price_eth = float(json.loads(response.text)['data']['1027']['quote']['USD']['price'])
+    change_24h_eth = float(json.loads(response.text)['data']['1027']['quote']['USD']['percent_change_24h'])
+    print('ETH: ${:.2f}'.format(price_eth),'  |  Change 24h: {:.2f}'.format(change_24h_eth)+'%')
 
     response = session.get(url, params = parameters_bnb)
-    price_bnb = float(json.loads(response.text)['data']['1839']['quote']['BRL']['price'])
-    print('Binance Coin: R${:.2f}'.format(price_bnb))
+    price_bnb = float(json.loads(response.text)['data']['1839']['quote']['USD']['price'])
+    change_24h_bnb = float(json.loads(response.text)['data']['1839']['quote']['USD']['percent_change_24h'])
+    print('BNB: ${:.2f}'.format(price_bnb),'   |  Change 24h: {:.2f}'.format(change_24h_bnb)+'%')
 
     response = session.get(url, params = parameters_ada)
-    price_ada = float(json.loads(response.text)['data']['2010']['quote']['BRL']['price'])
-    print('Cardano: R${:.2f}'.format(price_ada))
+    price_ada = float(json.loads(response.text)['data']['2010']['quote']['USD']['price'])
+    change_24h_ada = float(json.loads(response.text)['data']['2010']['quote']['USD']['percent_change_24h'])
+    print('ADA: ${:.2f}'.format(price_ada),'     |  Change 24h: {:.2f}'.format(change_24h_ada)+'%')
 
     response = session.get(url, params = parameters_xpr)
-    price_xrp = float(json.loads(response.text)['data']['52']['quote']['BRL']['price'])
-    print('Ripple: R${:.2f}'.format(price_xrp))
+    price_xrp = float(json.loads(response.text)['data']['52']['quote']['USD']['price'])
+    change_24h_xrp = float(json.loads(response.text)['data']['52']['quote']['USD']['percent_change_24h'])
+    print('XRP: ${:.2f}'.format(price_xrp),'     |  Change 24h: {:.2f}'.format(change_24h_xrp)+'%')
 
     response = session.get(url, params = parameters_doge)
-    price_doge = float(json.loads(response.text)['data']['74']['quote']['BRL']['price'])
-    print('Dogecoin: R${:.2f}'.format(price_doge))
+    price_doge = float(json.loads(response.text)['data']['74']['quote']['USD']['price'])
+    change_24h_doge = float(json.loads(response.text)['data']['74']['quote']['USD']['percent_change_24h'])
+    print('DOGE: ${:.2f}'.format(price_doge),'    |  Change 24h: {:.2f}'.format(change_24h_doge)+'%')
 
     response = session.get(url, params = parameteres_dot)
-    price_dot = float(json.loads(response.text)['data']['6636']['quote']['BRL']['price'])
-    print('Polkadot: R${:.2f}'.format(price_dot))
+    price_dot = float(json.loads(response.text)['data']['6636']['quote']['USD']['price'])
+    change_24h_dot = float(json.loads(response.text)['data']['6636']['quote']['USD']['percent_change_24h'])
+    print('DOT: ${:.2f}'.format(price_dot),'    |  Change 24h: {:.2f}'.format(change_24h_dot)+'%')
 
     response = session.get(url, params = parameters_icp)
-    price_icp = float(json.loads(response.text)['data']['8916']['quote']['BRL']['price'])
-    print('Internet Computer: R${:.2f}'.format(price_icp))
+    price_icp = float(json.loads(response.text)['data']['8916']['quote']['USD']['price'])
+    change_24h_icp = float(json.loads(response.text)['data']['8916']['quote']['USD']['percent_change_24h'])
+    print('ICP: ${:.2f}'.format(price_icp),'   |  Change 24h: {:.2f}'.format(change_24h_icp)+'%')
 
     response = session.get(url, params = parameters_link)
-    price_link = float(json.loads(response.text)['data']['1975']['quote']['BRL']['price'])
-    print('Chainlink: R${:.2f}'.format(price_link))
+    price_link = float(json.loads(response.text)['data']['1975']['quote']['USD']['price'])
+    change_24h_link = float(json.loads(response.text)['data']['1975']['quote']['USD']['percent_change_24h'])
+    print('LINK: ${:.2f}'.format(price_link),'   |  Change 24h: {:.2f}'.format(change_24h_link)+'%')
 
-    response = session.get(url, params = parameters_usd)
-    price_usd = float(json.loads(response.text)['data']['825']['quote']['BRL']['price'])
-    print('Tether: R${:.2f}'.format(price_usd))
+    # response = session.get(url, params = parameters_usd)
+    # price_usd = float(json.loads(response.text)['data']['825']['quote']['USD']['price'])
+    # change_24h_usd = float(json.loads(response.text)['data']['825']['quote']['USD']['percent_change_24h'])
+    # print('Tether: ${:.2f}'.format(price_usd),'|  Change 24h: {:.2f}'.format(change_24h_usd)+'%')
 
     time.sleep(60)
     os.system('cls')
