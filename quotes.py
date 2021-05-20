@@ -1,8 +1,9 @@
 from requests import Request, Session
 import json
-import pprint
+import tweepy
 import os
 import datetime
+import time
 
 url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest'
 
@@ -64,33 +65,48 @@ headers = {
 session = Session()
 session.headers.update(headers)
 
-response = session.get(url, params = parameters_btc)
-print("Bitcoin price:", json.loads(response.text)['data']['1']['quote']['BRL']['price'])
+while True:
 
-response = session.get(url, params = parameters_eth)
-print("Ethereum price:", json.loads(response.text)['data']['1027']['quote']['BRL']['price'])
+    response = session.get(url, params = parameters_btc)
+    price_btc = float(json.loads(response.text)['data']['1']['quote']['BRL']['price'])
+    print('Bitcoin: R${:.2f}'.format(price_btc))
 
-response = session.get(url, params = parameters_bnb)
-pprint.pprint(json.loads(response.text)['data']['1839']['quote']['BRL']['price'])
+    response = session.get(url, params = parameters_eth)
+    price_eth = float(json.loads(response.text)['data']['1027']['quote']['BRL']['price'])
+    print('Ethereum: R${:.2f}'.format(price_eth))
 
-response = session.get(url, params = parameters_ada)
-pprint.pprint(json.loads(response.text)['data']['2010']['quote']['BRL']['price'])
+    response = session.get(url, params = parameters_bnb)
+    price_bnb = float(json.loads(response.text)['data']['1839']['quote']['BRL']['price'])
+    print('Binance Coin: R${:.2f}'.format(price_bnb))
 
-response = session.get(url, params = parameters_xpr)
-pprint.pprint(json.loads(response.text)['data']['52']['quote']['BRL']['price'])
+    response = session.get(url, params = parameters_ada)
+    price_ada = float(json.loads(response.text)['data']['2010']['quote']['BRL']['price'])
+    print('Cardano: R${:.2f}'.format(price_ada))
 
-response = session.get(url, params = parameters_doge)
-pprint.pprint(json.loads(response.text)['data']['74']['quote']['BRL']['price'])
+    response = session.get(url, params = parameters_xpr)
+    price_xrp = float(json.loads(response.text)['data']['52']['quote']['BRL']['price'])
+    print('Ripple: R${:.2f}'.format(price_xrp))
 
-response = session.get(url, params = parameteres_dot)
-pprint.pprint(json.loads(response.text)['data']['6636']['quote']['BRL']['price'])
+    response = session.get(url, params = parameters_doge)
+    price_doge = float(json.loads(response.text)['data']['74']['quote']['BRL']['price'])
+    print('Dogecoin: R${:.2f}'.format(price_doge))
 
-response = session.get(url, params = parameters_icp)
-pprint.pprint(json.loads(response.text)['data']['8916']['quote']['BRL']['price'])
+    response = session.get(url, params = parameteres_dot)
+    price_dot = float(json.loads(response.text)['data']['6636']['quote']['BRL']['price'])
+    print('Polkadot: R${:.2f}'.format(price_dot))
 
-response = session.get(url, params = parameters_link)
-pprint.pprint(json.loads(response.text)['data']['1975']['quote']['BRL']['price'])
+    response = session.get(url, params = parameters_icp)
+    price_icp = float(json.loads(response.text)['data']['8916']['quote']['BRL']['price'])
+    print('Internet Computer: R${:.2f}'.format(price_icp))
 
-response = session.get(url, params = parameters_usd)
-pprint.pprint(json.loads(response.text)['data']['825']['quote']['BRL']['price'])
+    response = session.get(url, params = parameters_link)
+    price_link = float(json.loads(response.text)['data']['1975']['quote']['BRL']['price'])
+    print('Chainlink: R${:.2f}'.format(price_link))
+
+    response = session.get(url, params = parameters_usd)
+    price_usd = float(json.loads(response.text)['data']['825']['quote']['BRL']['price'])
+    print('Tether: R${:.2f}'.format(price_usd))
+
+    time.sleep(60)
+    os.system('cls')
 
