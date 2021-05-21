@@ -39,11 +39,6 @@ parameters_doge = {
     'convert': 'USD'
 }
 
-parameteres_dot = {
-    'slug': 'polkadot-new',
-    'convert': 'USD'
-}
-
 parameters_icp = {
     'slug': 'internet-computer',
     'convert': 'USD'
@@ -51,11 +46,6 @@ parameters_icp = {
 
 parameters_link = {
     'slug': 'chainlink',
-    'convert': 'USD'
-}
-
-parameters_usd = {
-    'slug': 'tether',
     'convert': 'USD'
 }
 
@@ -120,11 +110,6 @@ while True:
         price_doge = float(json.loads(response.text)['data']['74']['quote']['USD']['price'])
         change_24h_doge = float(json.loads(response.text)['data']['74']['quote']['USD']['percent_change_24h'])
 
-        #polkadot
-        response = session.get(url, params = parameteres_dot)
-        price_dot = float(json.loads(response.text)['data']['6636']['quote']['USD']['price'])
-        change_24h_dot = float(json.loads(response.text)['data']['6636']['quote']['USD']['percent_change_24h'])
-
         #internet computer
         response = session.get(url, params = parameters_icp)
         price_icp = float(json.loads(response.text)['data']['8916']['quote']['USD']['price'])
@@ -135,21 +120,25 @@ while True:
         price_link = float(json.loads(response.text)['data']['1975']['quote']['USD']['price'])
         change_24h_link = float(json.loads(response.text)['data']['1975']['quote']['USD']['percent_change_24h'])
 
-        api.update_status('BTC: ${:.2f}'.format(price_btc) + ' | % 24h: {:.2f}'.format(change_24h_btc) + '\n'+
-                          'ETH: ${:.2f}'.format(price_eth) + ' | % 24h: {:.2f}'.format(change_24h_eth) + '\n'+
-                          'BNB: ${:.2f}'.format(price_bnb) + ' | % 24h: {:.2f}'.format(change_24h_bnb) + '\n'+
-                          'ADA: ${:.2f}'.format(price_ada) + ' | % 24h: {:.2f}'.format(change_24h_ada) + '\n'+
-                          'XRP: ${:.2f}'.format(price_xrp) + ' | % 24h: {:.2f}'.format(change_24h_xrp) + '\n'+
-                          'DOGE: ${:.2f}'.format(price_doge) + ' | % 24h: {:.2f}'.format(change_24h_doge) + '\n'+
-                          'DOT: ${:.2f}'.format(price_dot) + ' | % 24h: {:.2f}'.format(change_24h_dot) + '\n'+
-                          'ICP: ${:.2f}'.format(price_icp) + ' | % 24h: {:.2f}'.format(change_24h_icp) + '\n'+
-                          'LINK: ${:.2f}'.format(price_link) + ' | % 24h: {:.2f}'.format(change_24h_link) + '\n')
+        time.gmtime() #Taking the UTC time zone to apply it to the tweet.
+        from time import gmtime, strftime
+        hour = strftime("%a, %d %b %Y %H:%M:%S UTC", gmtime())
+
+        api.update_status('BTC: ${:.2f}'.format(price_btc) + ' ↔️ % 24h: {:.2f}'.format(change_24h_btc) + '\n'+
+                          'ETH: ${:.2f}'.format(price_eth) + ' ↔️ % 24h: {:.2f}'.format(change_24h_eth) + '\n'+
+                          'BNB: ${:.2f}'.format(price_bnb) + ' ↔️ % 24h: {:.2f}'.format(change_24h_bnb) + '\n'+
+                          'ADA: ${:.2f}'.format(price_ada) + ' ↔️ % 24h: {:.2f}'.format(change_24h_ada) + '\n'+
+                          'XRP: ${:.2f}'.format(price_xrp) + ' ↔️ % 24h: {:.2f}'.format(change_24h_xrp) + '\n'+
+                          'DOGE: ${:.2f}'.format(price_doge) + ' ↔️ % 24h: {:.2f}'.format(change_24h_doge) + '\n'+
+                          'ICP: ${:.2f}'.format(price_icp) + ' ↔️ % 24h: {:.2f}'.format(change_24h_icp) + '\n'+
+                          'LINK: ${:.2f}'.format(price_link) + ' ↔️ % 24h: {:.2f}'.format(change_24h_link) + '\n'+
+			              '\n🕑 ' + hour)
         
-        print('Successfully tweeted.')
-        time.sleep(7200)
+        print('Successfully tweeted.', hour)
+        time.sleep(7200)#2 in 2 hours. 1 hour = 3600 seconds
 
     except tweepy.TweepError as e:
-        print('\nError: ', e.reason, '\n')
+        print('\nError:', e.reason, '\n')
 
     except StopIteration:
         break
