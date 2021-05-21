@@ -4,7 +4,8 @@ import tweepy
 import os
 import datetime
 import time
-import pprint
+
+### API CoinMarketCap
 
 url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest'
 
@@ -58,68 +59,97 @@ parameters_usd = {
     'convert': 'USD'
 }
 
+#Access Key CoinMarketCap API
 headers = {
     'Accepts': 'application/json',
-    'X-CMC_PRO_API_KEY': '4b3f6d13-e0ad-4400-816f-ba8a0a4af7b4'
+    'X-CMC_PRO_API_KEY': '' #Insert the key obtained from your CoinMarketCap account.
 }
 
 session = Session()
 session.headers.update(headers)
 
+
+### API Twitter (Tweepy)
+
+#Personal details
+consumer_key = '' #Insert the key obtained from your Twitter account.
+consumer_secret = '' #Insert the key obtained from your Twitter account.
+access_token = '' #Insert the key obtained from your Twitter account.
+access_token_secret = '' #Insert the key obtained from your Twitter account.
+
+#Authenticate to Twitter
+authentication = tweepy.OAuthHandler(consumer_key, consumer_secret)
+authentication.set_access_token(access_token, access_token_secret)
+
+#Create API object
+api = tweepy.API(authentication, wait_on_rate_limit = True, wait_on_rate_limit_notify = True)
+user = api.me()
+
+
+###Create a tweet
+
 while True:
+    try:
+        #bitcoin
+        response = session.get(url, params = parameters_btc)
+        price_btc = float(json.loads(response.text)['data']['1']['quote']['USD']['price'])
+        change_24h_btc = float(json.loads(response.text)['data']['1']['quote']['USD']['percent_change_24h'])
 
-#'percent_change_24h'
+        #ethereum
+        response = session.get(url, params = parameters_eth)
+        price_eth = float(json.loads(response.text)['data']['1027']['quote']['USD']['price'])
+        change_24h_eth = float(json.loads(response.text)['data']['1027']['quote']['USD']['percent_change_24h'])
 
-    response = session.get(url, params = parameters_btc)
-    price_btc = float(json.loads(response.text)['data']['1']['quote']['USD']['price'])
-    change_24h_btc = float(json.loads(response.text)['data']['1']['quote']['USD']['percent_change_24h'])
-    print('BTC: ${:.2f}'.format(price_btc),' |  Change 24h: {:.2f}'.format(change_24h_btc) + '%')
+        #binance coin
+        response = session.get(url, params = parameters_bnb)
+        price_bnb = float(json.loads(response.text)['data']['1839']['quote']['USD']['price'])
+        change_24h_bnb = float(json.loads(response.text)['data']['1839']['quote']['USD']['percent_change_24h'])
 
-    response = session.get(url, params = parameters_eth)
-    price_eth = float(json.loads(response.text)['data']['1027']['quote']['USD']['price'])
-    change_24h_eth = float(json.loads(response.text)['data']['1027']['quote']['USD']['percent_change_24h'])
-    print('ETH: ${:.2f}'.format(price_eth),'  |  Change 24h: {:.2f}'.format(change_24h_eth)+'%')
+        #cardano
+        response = session.get(url, params = parameters_ada)
+        price_ada = float(json.loads(response.text)['data']['2010']['quote']['USD']['price'])
+        change_24h_ada = float(json.loads(response.text)['data']['2010']['quote']['USD']['percent_change_24h'])
 
-    response = session.get(url, params = parameters_bnb)
-    price_bnb = float(json.loads(response.text)['data']['1839']['quote']['USD']['price'])
-    change_24h_bnb = float(json.loads(response.text)['data']['1839']['quote']['USD']['percent_change_24h'])
-    print('BNB: ${:.2f}'.format(price_bnb),'   |  Change 24h: {:.2f}'.format(change_24h_bnb)+'%')
+        #ripple
+        response = session.get(url, params = parameters_xpr)
+        price_xrp = float(json.loads(response.text)['data']['52']['quote']['USD']['price'])
+        change_24h_xrp = float(json.loads(response.text)['data']['52']['quote']['USD']['percent_change_24h'])
 
-    response = session.get(url, params = parameters_ada)
-    price_ada = float(json.loads(response.text)['data']['2010']['quote']['USD']['price'])
-    change_24h_ada = float(json.loads(response.text)['data']['2010']['quote']['USD']['percent_change_24h'])
-    print('ADA: ${:.2f}'.format(price_ada),'     |  Change 24h: {:.2f}'.format(change_24h_ada)+'%')
+        #doge coin
+        response = session.get(url, params = parameters_doge)
+        price_doge = float(json.loads(response.text)['data']['74']['quote']['USD']['price'])
+        change_24h_doge = float(json.loads(response.text)['data']['74']['quote']['USD']['percent_change_24h'])
 
-    response = session.get(url, params = parameters_xpr)
-    price_xrp = float(json.loads(response.text)['data']['52']['quote']['USD']['price'])
-    change_24h_xrp = float(json.loads(response.text)['data']['52']['quote']['USD']['percent_change_24h'])
-    print('XRP: ${:.2f}'.format(price_xrp),'     |  Change 24h: {:.2f}'.format(change_24h_xrp)+'%')
+        #polkadot
+        response = session.get(url, params = parameteres_dot)
+        price_dot = float(json.loads(response.text)['data']['6636']['quote']['USD']['price'])
+        change_24h_dot = float(json.loads(response.text)['data']['6636']['quote']['USD']['percent_change_24h'])
 
-    response = session.get(url, params = parameters_doge)
-    price_doge = float(json.loads(response.text)['data']['74']['quote']['USD']['price'])
-    change_24h_doge = float(json.loads(response.text)['data']['74']['quote']['USD']['percent_change_24h'])
-    print('DOGE: ${:.2f}'.format(price_doge),'    |  Change 24h: {:.2f}'.format(change_24h_doge)+'%')
+        #internet computer
+        response = session.get(url, params = parameters_icp)
+        price_icp = float(json.loads(response.text)['data']['8916']['quote']['USD']['price'])
+        change_24h_icp = float(json.loads(response.text)['data']['8916']['quote']['USD']['percent_change_24h'])
 
-    response = session.get(url, params = parameteres_dot)
-    price_dot = float(json.loads(response.text)['data']['6636']['quote']['USD']['price'])
-    change_24h_dot = float(json.loads(response.text)['data']['6636']['quote']['USD']['percent_change_24h'])
-    print('DOT: ${:.2f}'.format(price_dot),'    |  Change 24h: {:.2f}'.format(change_24h_dot)+'%')
+        #chainlink
+        response = session.get(url, params = parameters_link)
+        price_link = float(json.loads(response.text)['data']['1975']['quote']['USD']['price'])
+        change_24h_link = float(json.loads(response.text)['data']['1975']['quote']['USD']['percent_change_24h'])
 
-    response = session.get(url, params = parameters_icp)
-    price_icp = float(json.loads(response.text)['data']['8916']['quote']['USD']['price'])
-    change_24h_icp = float(json.loads(response.text)['data']['8916']['quote']['USD']['percent_change_24h'])
-    print('ICP: ${:.2f}'.format(price_icp),'   |  Change 24h: {:.2f}'.format(change_24h_icp)+'%')
+        api.update_status('BTC: ${:.2f}'.format(price_btc) + ' | % 24h: {:.2f}'.format(change_24h_btc) + '\n'+
+                          'ETH: ${:.2f}'.format(price_eth) + ' | % 24h: {:.2f}'.format(change_24h_eth) + '\n'+
+                          'BNB: ${:.2f}'.format(price_bnb) + ' | % 24h: {:.2f}'.format(change_24h_bnb) + '\n'+
+                          'ADA: ${:.2f}'.format(price_ada) + ' | % 24h: {:.2f}'.format(change_24h_ada) + '\n'+
+                          'XRP: ${:.2f}'.format(price_xrp) + ' | % 24h: {:.2f}'.format(change_24h_xrp) + '\n'+
+                          'DOGE: ${:.2f}'.format(price_doge) + ' | % 24h: {:.2f}'.format(change_24h_doge) + '\n'+
+                          'DOT: ${:.2f}'.format(price_dot) + ' | % 24h: {:.2f}'.format(change_24h_dot) + '\n'+
+                          'ICP: ${:.2f}'.format(price_icp) + ' | % 24h: {:.2f}'.format(change_24h_icp) + '\n'+
+                          'LINK: ${:.2f}'.format(price_link) + ' | % 24h: {:.2f}'.format(change_24h_link) + '\n')
+        
+        print('Successfully tweeted.')
+        time.sleep(7200)
 
-    response = session.get(url, params = parameters_link)
-    price_link = float(json.loads(response.text)['data']['1975']['quote']['USD']['price'])
-    change_24h_link = float(json.loads(response.text)['data']['1975']['quote']['USD']['percent_change_24h'])
-    print('LINK: ${:.2f}'.format(price_link),'   |  Change 24h: {:.2f}'.format(change_24h_link)+'%')
+    except tweepy.TweepError as e:
+        print('\nError: ', e.reason, '\n')
 
-    # response = session.get(url, params = parameters_usd)
-    # price_usd = float(json.loads(response.text)['data']['825']['quote']['USD']['price'])
-    # change_24h_usd = float(json.loads(response.text)['data']['825']['quote']['USD']['percent_change_24h'])
-    # print('Tether: ${:.2f}'.format(price_usd),'|  Change 24h: {:.2f}'.format(change_24h_usd)+'%')
-
-    time.sleep(60)
-    os.system('cls')
-
+    except StopIteration:
+        break
