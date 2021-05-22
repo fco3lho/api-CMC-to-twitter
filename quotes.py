@@ -5,81 +5,80 @@ import os
 import datetime
 import time
 
-### API CoinMarketCap
+while True: #This 'while' was previously implemented only where the price capture 
+            #variables are located, but for long time 'time.sleep()', the data 
+            #became idle and was lost, so it was necessary to use it at the 
+            # beginning of every interaction with the APIs.
+    try: 
+        
+        # API COINMARKETCAP
+        url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest'
 
-url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest'
+        parameters_btc = {
+            'slug': 'bitcoin',
+            'convert': 'USD'
+        }
 
-parameters_btc = {
-    'slug': 'bitcoin',
-    'convert': 'USD'
-}
+        parameters_eth = {
+            'slug': 'ethereum',
+            'convert': 'USD'
+        }
 
-parameters_eth = {
-    'slug': 'ethereum',
-    'convert': 'USD'
-}
+        parameters_bnb = {
+            'slug': 'binance-coin',
+            'convert': 'USD'
+        }
 
-parameters_bnb = {
-    'slug': 'binance-coin',
-    'convert': 'USD'
-}
+        parameters_ada = {
+            'slug': 'cardano',
+            'convert': 'USD'
+        }
 
-parameters_ada = {
-    'slug': 'cardano',
-    'convert': 'USD'
-}
+        parameters_xpr = {
+            'slug': 'xrp',
+            'convert': 'USD'
+        }
 
-parameters_xpr = {
-    'slug': 'xrp',
-    'convert': 'USD'
-}
+        parameters_doge = {
+            'slug': 'dogecoin',
+            'convert': 'USD'
+        }
 
-parameters_doge = {
-    'slug': 'dogecoin',
-    'convert': 'USD'
-}
+        parameters_icp = {
+            'slug': 'internet-computer',
+            'convert': 'USD'
+        }
 
-parameters_icp = {
-    'slug': 'internet-computer',
-    'convert': 'USD'
-}
+        parameters_link = {
+            'slug': 'chainlink',
+            'convert': 'USD'
+        }
 
-parameters_link = {
-    'slug': 'chainlink',
-    'convert': 'USD'
-}
+        #Access Key CoinMarketCap API
+        headers = {
+            'Accepts': 'application/json',
+            'X-CMC_PRO_API_KEY': '' #Insert the key obtained from your CoinMarketCap account.
+        }
 
-#Access Key CoinMarketCap API
-headers = {
-    'Accepts': 'application/json',
-    'X-CMC_PRO_API_KEY': '' #Insert the key obtained from your CoinMarketCap account.
-}
+        session = Session()
+        session.headers.update(headers)
 
-session = Session()
-session.headers.update(headers)
+        #Personal details (Tweepy)
+        consumer_key = '' #Insert the key obtained from your Twitter account.
+        consumer_secret = '' #Insert the key obtained from your Twitter account.
+        access_token = '' #Insert the key obtained from your Twitter account.
+        access_token_secret = '' #Insert the key obtained from your Twitter account.
 
+        #Authenticate to Twitter (Tweepy)
+        authentication = tweepy.OAuthHandler(consumer_key, consumer_secret)
+        authentication.set_access_token(access_token, access_token_secret)
 
-### API Twitter (Tweepy)
+        #Create API object (Tweepy)
+        api = tweepy.API(authentication, wait_on_rate_limit = True, wait_on_rate_limit_notify = True)
+        user = api.me()
 
-#Personal details
-consumer_key = '' #Insert the key obtained from your Twitter account.
-consumer_secret = '' #Insert the key obtained from your Twitter account.
-access_token = '' #Insert the key obtained from your Twitter account.
-access_token_secret = '' #Insert the key obtained from your Twitter account.
-
-#Authenticate to Twitter
-authentication = tweepy.OAuthHandler(consumer_key, consumer_secret)
-authentication.set_access_token(access_token, access_token_secret)
-
-#Create API object
-api = tweepy.API(authentication, wait_on_rate_limit = True, wait_on_rate_limit_notify = True)
-user = api.me()
-
-
-###Create a tweet
-
-while True:
-    try:
+        #From here on down, the quotes are captured and the tweet is created.
+ 
         #bitcoin
         response = session.get(url, params = parameters_btc)
         price_btc = float(json.loads(response.text)['data']['1']['quote']['USD']['price'])
