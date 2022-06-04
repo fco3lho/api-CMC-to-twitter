@@ -88,27 +88,35 @@ Serão apresentados aqui algumas imagens das postagens feitas pelo código sendo
 ### Imagens
 
 <p align="center">
- <img height="250rem" src="/imgs/1.jpeg">
+ <img height="250rem" src="/imgs/1.jpg">
 </p>
 
 <p align="center">
- <img height="250rem" src="/imgs/2.jpeg">
+ <img height="250rem" src="/imgs/2.jpg">
 </p>
 
 <p align="center">
- <img height="250rem" src="/imgs/3.jpeg">
+ <img height="250rem" src="/imgs/3.jpg">
 </p>
 
 <p align="center">
- <img height="250rem" src="/imgs/4.jpeg">
+ <img height="250rem" src="/imgs/4.jpg">
 </p>
 
 <p align="center">
- <img height="250rem" src="/imgs/5.jpeg">
+ <img height="250rem" src="/imgs/5.jpg">
 </p>
 
 <p align="center">
- <img height="250rem" src="/imgs/6.jpeg">
+ <img height="250rem" src="/imgs/6.jpg">
+</p>
+
+<p align="center">
+ <img height="250rem" src="/imgs/7.jpg">
+</p>
+
+<p align="center">
+ <img height="250rem" src="/imgs/8.jpg">
 </p>
 
 ## Considerações
