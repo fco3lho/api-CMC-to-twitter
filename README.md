@@ -3,6 +3,8 @@
 <p> 
   O seguinte código tem a função de coletar o preço de 8 diferentes criptomoedas do site <a href="https://coinmarketcap.com">CoinMarketCap</a> usando a API disponibilizada pelo site para salvar os preços em variáveis utilizadas posteriormente para serem postadas no <a href="twitter.com">Twitter</a> de forma automatizada.
 </p>
+
+<strong><i>Observação: As chaves de acesso disponibilizadas aqui são todas fictícias por questão de segurança.</i></strong>
  
 ## Metodologia
  
