@@ -57,25 +57,24 @@ while True: #This 'while' was previously implemented only where the price captur
         #Access Key CoinMarketCap API
         headers = {
             'Accepts': 'application/json',
-            'X-CMC_PRO_API_KEY': '' #Insert the key obtained from your CoinMarketCap account.
+            'X-CMC_PRO_API_KEY': '4b3f6d13-e0ad-4400-816f-ba8a0a4af7b4' #Insert the key obtained from your CoinMarketCap account.
         }
 
         session = Session()
         session.headers.update(headers)
 
         #Personal details (Tweepy)
-        consumer_key = '' #Insert the key obtained from your Twitter account.
-        consumer_secret = '' #Insert the key obtained from your Twitter account.
-        access_token = '' #Insert the key obtained from your Twitter account.
-        access_token_secret = '' #Insert the key obtained from your Twitter account.
+        consumer_key = 'e5li8B6cfykjNEbYHxX4GNwzn' #Insert the key obtained from your Twitter account.
+        consumer_secret = 'Flom6PPWJQjk7cI7SiHuElT6JT3tAo0MQRBVT83LSgc7Tjo2BA' #Insert the key obtained from your Twitter account.
+        access_token = '1395426651425710088-v7XvQVOpYwjOFzzAVa9cIphHQiZBKd' #Insert the key obtained from your Twitter account.
+        access_token_secret = 'WBBdXfkBp20MhYOulp5JZax7CWA9pdVf7LJwXHTdTDs01' #Insert the key obtained from your Twitter account.
 
         #Authenticate to Twitter (Tweepy)
         authentication = tweepy.OAuthHandler(consumer_key, consumer_secret)
         authentication.set_access_token(access_token, access_token_secret)
 
         #Create API object (Tweepy)
-        api = tweepy.API(authentication, wait_on_rate_limit = True, wait_on_rate_limit_notify = True)
-        user = api.me()
+        api = tweepy.API(authentication, wait_on_rate_limit = True)
 
         #From here on down, the quotes are captured and the tweet is created.
  
@@ -134,9 +133,9 @@ while True: #This 'while' was previously implemented only where the price captur
 			              '\n🕑 ' + hour)
         
         print('Successfully tweeted.', hour)
-        time.sleep(7200)#2 in 2 hours. 1 hour = 3600 seconds
+        time.sleep(900)#15 in 15 minutes. 
 
-    except tweepy.TweepError as e:
+    except tweepy.TwitterServerError as e:
         print('\nError:', e.reason, '\n')
 
     except StopIteration:
