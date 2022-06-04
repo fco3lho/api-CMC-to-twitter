@@ -13,10 +13,10 @@
  <p align="center"><i>Consumo de chaves do Twitter</i></p>
  
 ```python
-consumer_key = 'e5li8B6cfykjNEaegxX4GNwzn' #Insert the API Key obtained from your Twitter account.
-consumer_secret = 'Flom6PPWJQjk7cI7SiYfRlT6JT3tAo0MQRBVT83LSgc7Tjo2BA' #Insert the API Key Secret obtained from your Twitter account.
-access_token = '1395428461425710088-v7XvQVOpYwjASuzAVa9cIphHQiZBKd' #Insert the Access Key obtained from your Twitter account.
-access_token_secret = 'WBBdXfkBp20MhZXulp5JZvx7CWA9pdVf7LJwXHTdTDs01' #Insert the Access Key Secret obtained from your Twitter account.
+consumer_key = 'e5li8B6cfykjNEeyqxX4GNwzn' #Insert the API Key obtained from your Twitter account.
+consumer_secret = 'Flum69PWJQjk7cI7SiYfRlT6JT3tAo0MQRBVT83LSgc7Tjo2BA' #Insert the API Key Secret obtained from your Twitter account.
+access_token = '1395928461425710088-v7XvUYOpYwjASuzAVa9cIphHQiZBKd' #Insert the Access Key obtained from your Twitter account.
+access_token_secret = 'WBBdXonBp20MhZXulp5JZvx7CWA9pdVf7LJwXHTdTDs01' #Insert the Access Key Secret obtained from your Twitter account.
 
 authentication = tweepy.OAuthHandler(consumer_key, consumer_secret)
 authentication.set_access_token(access_token, access_token_secret)
