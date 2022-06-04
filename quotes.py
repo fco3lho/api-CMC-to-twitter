@@ -57,17 +57,17 @@ while True: #This 'while' was previously implemented only where the price captur
         #Access Key CoinMarketCap API
         headers = {
             'Accepts': 'application/json',
-            'X-CMC_PRO_API_KEY': '4b3f6d13-e0ad-4400-816f-ba8a0a4af7b4' #Insert the key obtained from your CoinMarketCap account.
+            'X-CMC_PRO_API_KEY': '7b3r6u13-e0ap-3400-816f-ba9a0a4af7b4' #Insert the key obtained from your CoinMarketCap account.
         }
 
         session = Session()
         session.headers.update(headers)
 
         #Personal details (Tweepy)
-        consumer_key = 'e5li8B6cfykjNEbYHxX4GNwzn' #Insert the key obtained from your Twitter account.
-        consumer_secret = 'Flom6PPWJQjk7cI7SiHuElT6JT3tAo0MQRBVT83LSgc7Tjo2BA' #Insert the key obtained from your Twitter account.
-        access_token = '1395426651425710088-v7XvQVOpYwjOFzzAVa9cIphHQiZBKd' #Insert the key obtained from your Twitter account.
-        access_token_secret = 'WBBdXfkBp20MhYOulp5JZax7CWA9pdVf7LJwXHTdTDs01' #Insert the key obtained from your Twitter account.
+        consumer_key = 'e5li8B6cfykjNEeyqxX4GNwzn' #Insert the key obtained from your Twitter account.
+        consumer_secret = 'Flum69PWJQjk7cI7SiYfRlT6JT3tAo0MQRBVT83LSgc7Tjo2BA' #Insert the key obtained from your Twitter account.
+        access_token = '1395928461425710088-v7XvUYOpYwjASuzAVa9cIphHQiZBKd' #Insert the key obtained from your Twitter account.
+        access_token_secret = 'WBBdXonBp20MhZXulp5JZvx7CWA9pdVf7LJwXHTdTDs01' #Insert the key obtained from your Twitter account.
 
         #Authenticate to Twitter (Tweepy)
         authentication = tweepy.OAuthHandler(consumer_key, consumer_secret)
